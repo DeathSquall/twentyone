@@ -1,7 +1,7 @@
 const defaultDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 11, 11, 11, 11]
 const defaultPlayers = [
     {
-        name: 'Penelopa',
+        name: 'You',
         score: 0
     },
     {
@@ -54,17 +54,15 @@ function extractCardFromDeck() {
     gameState.deck.splice(index, 1)
     return card
 }
-function takeCard() {
 
+function botsTurn() {
     let i = 0;
-    for (i = 0; i < gameState.players.length; i++) {
+    for (i = 1; i < gameState.players.length; i++) {
         let ch = chance(i)
         let card = extractCardFromDeck()
         gameState.players[i].score += card;
         gameState.players[i].chance = ch
-        console.log(gameState.players[i].chance)
     }
-    console.log(gameState.deck)
 
     updateScores()
 
@@ -73,7 +71,16 @@ function takeCard() {
             gameEnd()
         }
     }
+}
 
+function takeCard() {
+
+    let ch = chance(0)
+    let card = extractCardFromDeck()
+    gameState.players[0].score += card;
+    gameState.players[0].chance = ch
+
+    botsTurn()
 }
 function updateScores() {
     let html = ""
@@ -112,11 +119,7 @@ function gameEnd() {
 }
 
 function passCard() {
-    let gameScreen = document.getElementById('gameScreen')
-    gameScreen.classList.remove('visible')
-
-    let gameEndScreen = document.getElementById('gameEndScreen')
-    gameEndScreen.classList.add('visible')
+    botsTurn()
 }
 function startNewGame() {
     let gameEndScreen = document.getElementById('gameEndScreen')
