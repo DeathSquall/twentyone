@@ -59,3 +59,27 @@ body {
     padding: 0.25em 0.75em;
   }
 }
+
+.card {
+  width:73px;
+  height:97px;
+  background:url(cards.png);
+}
+
+.card-hearts { background-position-y: -198px}
+.card-diamonds { background-position-y: -297px}
+.card-clubs { background-position-y: 0px}
+.card-spades { background-position-y: -99px}
+.card-a { background-position-x: 0}
+.card-2 { background-position-x: -73px}
+.card-3 { background-position-x: calc(-73px * 2)}
+.card-4 { background-position-x: calc(-73px * 3)}
+.card-5 { background-position-x: calc(-73px * 4)}
+.card-6 { background-position-x: calc(-73px * 5)}
+.card-7 { background-position-x: calc(-73px * 6)}
+.card-8 { background-position-x: calc(-73px * 7)}
+.card-9 { background-position-x: calc(-73px * 8)}
+.card-10 { background-position-x: calc(-73px * 9)}
+.card-j { background-position-x: calc(-73px * 10)}
+.card-q { background-position-x: calc(-73px * 11)}
+.card-k { background-position-x: calc(-73px * 12)}
