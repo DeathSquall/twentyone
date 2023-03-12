@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="code.js"></script>
+</head>
+
+<body>
+    <div class="display">
+        <h1 class="title">It's a 21 game</h1>
+        <div class="screens">
+            <div id="gameStartScreen" class="screen visible">
+                <p>Rules</p>
+                <p>...</p>
+                <div class="actions">
+                    <button onclick="startGame()" class="button-54" role="button">Start game</button>
+                </div>
+            </div>
+            <div id="gameScreen" class="screen">
+                <table>
+                    <tr id="playersScores"></tr>
+                </table>
+                <div class="actions">
+                    <button onclick="takeCard()" class="button-54" role="button">Take card</button>
+                    <button onclick="passCard()" class="button-54" role="button">Pass</button>
+                    <button onclick="restart()" class="button-54" role="button">Restart</button>
+                </div>
+            </div>
+            <div id="gameEndScreen" class="screen">
+                <div id="gameResult"><span id="maxScore">22</span> won!</div>
+                <div class="actions">
+                    <button onclick="startNewGame()" class="button-54" role="button">Start new game</button>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+</html>
