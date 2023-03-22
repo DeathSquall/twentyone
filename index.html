@@ -19,25 +19,24 @@
             <div id="gameScreen" class="screen">
                 <table>
                     <tr id="playersScores"></tr>
+                    <tr id="playersCards"></tr>
                 </table>
-                <div class="actions">
+                <div class="actions invisible" id="gameScreenActions">
                     <button onclick="takeCard()" class="button-54" role="button">Take card</button>
                     <button onclick="passCard()" class="button-54" role="button">Pass</button>
                     <button onclick="restart()" class="button-54" role="button">Restart</button>
                 </div>
-            </div>
-            <div id="gameEndScreen" class="screen">
-                <div id="gameResult"><span id="maxScore">22</span> won!</div>
-                <div class="actions">
-                    <button onclick="startNewGame()" class="button-54" role="button">Start new game</button>
-                </div>
+                <div id="gameEndScreen" class="screen">
+                    <div id="gameResult"><span id="maxScore">22</span> won!</div>
+                    <div class="actions">
+                        <button onclick="startNewGame()" class="button-54" role="button">Start new game</button>
+                    </div>
 
+                </div>
             </div>
+
         </div>
-        <div style="display:flex">
-            <div class="card card-hearts card-0"></div>
-            <div class="card card-clubs card-k"></div>
-        </div>
+    </div>
 </body>
 
 </html>
