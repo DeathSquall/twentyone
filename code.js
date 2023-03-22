@@ -166,7 +166,7 @@ function updateScores() {
         for (let j = 0; j < gameState.players[i].cards.length; j++) {
             let cardType = gameState.players[i].cards[j].type
             let cardValue = gameState.players[i].cards[j].value
-            html = html + '<div class="card card-' + cardType + ' card-' + cardValue + ' "></div>'
+            html = html + '<div class="card card-' + cardType + ' card-' + cardValue + ' " style="left:'+ (j*20) +'px"></div>'
         }
         html = html + '</td>';
     }

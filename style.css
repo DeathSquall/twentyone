@@ -63,10 +63,21 @@ body {
   }
 }
 
+#playersCards {
+  height:120px
+}
+
+.cards {
+  position:relative;
+}
+
 .card {
   width:73px;
   height:97px;
   background:url(cards.png);
+  position:absolute;
+  left:0px;
+  top:0px;
 }
 
 .card-hearts { background-position-y: -198px}
