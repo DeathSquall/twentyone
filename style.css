@@ -78,6 +78,16 @@ body {
   position:absolute;
   left:0px;
   top:0px;
+  animation-name: cardAnimation;
+  animation-duration: 1s;
+}
+
+@keyframes  cardAnimation {
+  0%   {margin-left:0px; top:60px;}
+  25%  {margin-left:20px; top:50px;}
+  50%  {margin-left:30px; top:30px;}
+  75%  {margin-left:20px; top:10px;}
+  100% {margin-left:0px; top:0px;}
 }
 
 .card-hearts { background-position-y: -198px}

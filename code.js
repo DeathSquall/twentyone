@@ -83,7 +83,7 @@ const gameDefaultState = {
 let gameState = {}
 function chance(i) {
 
-    let difference = 22 - gameState.players[i].score 
+    let difference = 22 - gameState.players[i].score
     let k = 0
     let badCardsCount = 0
     for (k = 0; k < gameState.deck.length; k++) {
@@ -104,8 +104,20 @@ function startGame() {
 
 
     let gameScreenActions = document.getElementById('gameScreenActions')
-    gameScreenActions.classList.remove('invisible')    
+    gameScreenActions.classList.remove('invisible')
+
     restart()
+
+    let playersCards = document.getElementById('playersCards')
+    playersCards.innerHTML = ''
+    for (let i = 0; i < gameState.players.length; i++) {
+        //html = html + '<td class="cards"> '
+        let cards = document.createElement('td')
+        cards.classList.add('cards')
+        playersCards.append(cards)
+        gameState.players[i].cardsContainer = cards
+    }
+
 
 }
 
@@ -121,6 +133,7 @@ function botsTurn() {
     for (i = 1; i < gameState.players.length; i++) {
         let card = extractCardFromDeck()
         gameState.players[i].cards.push(card)
+        gameState.players[i].lastCard = card
         gameState.players[i].score += card.value;
         let ch = chance(i)
         gameState.players[i].chance = ch
@@ -139,6 +152,7 @@ function takeCard() {
 
     let card = extractCardFromDeck()
     gameState.players[0].cards.push(card)
+    gameState.players[0].lastCard = card
     gameState.players[0].score += card.value;
     let ch = chance(0)
     gameState.players[0].chance = ch
@@ -160,17 +174,32 @@ function updateScores() {
     }
     document.getElementById('playersScores').innerHTML = html
 
-    html = ""
     for (let i = 0; i < gameState.players.length; i++) {
-        html = html + '<td class="cards"> '
-        for (let j = 0; j < gameState.players[i].cards.length; j++) {
-            let cardType = gameState.players[i].cards[j].type
-            let cardValue = gameState.players[i].cards[j].value
-            html = html + '<div class="card card-' + cardType + ' card-' + cardValue + ' " style="left:'+ (j*20) +'px"></div>'
-        }
-        html = html + '</td>';
+        //for (let j = 0; j < gameState.players[i].cards.length; j++) {
+        let card = gameState.players[i].lastCard
+        if (!card) continue
+        let j = gameState.players[i].cards.length - 1
+        let newCardElement = document.createElement('div')
+        let cardType = card.type
+        let cardValue = card.value
+        newCardElement.classList.add('card')
+        newCardElement.classList.add('card-' + cardType)
+        newCardElement.classList.add('card-' + cardValue)
+        newCardElement.style = 'left:' + (j * 20) + 'px'
+        gameState.players[i].cardsContainer.append(newCardElement)
+        //}
     }
-    document.getElementById('playersCards').innerHTML = html
+    /*html = ""
+for (let i = 0; i < gameState.players.length; i++) {
+    html = html + '<td class="cards"> '
+    for (let j = 0; j < gameState.players[i].cards.length; j++) {
+        let cardType = gameState.players[i].cards[j].type
+        let cardValue = gameState.players[i].cards[j].value
+        html = html + '<div class="card card-' + cardType + ' card-' + cardValue + ' " style="left:'+ (j*20) +'px"></div>'
+    }
+    html = html + '</td>';
+}
+document.getElementById('playersCards').innerHTML = html*/
 }
 function gameEnd() {
 
@@ -193,6 +222,8 @@ function gameEnd() {
     gameScreenActions.classList.add('invisible')
 }
 function passCard() {
+
+    gameState.players[0].lastCard = null
     botsTurn()
 }
 function startNewGame() {
