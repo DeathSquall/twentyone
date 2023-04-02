@@ -57,22 +57,26 @@ const defaultPlayers = [
     {
         name: 'You',
         cards: [],
-        score: 0
+        score: 0 ,
+        winsScore:0
     },
     {
         name: 'Rodion',
         cards: [],
-        score: 0
+        score: 0 ,
+        winsScore: 0
     },
     {
         name: 'Elena',
         cards: [],
-        score: 0
+        score: 0 ,
+        winsScore:0
     },
     {
         name: 'Peter',
         cards: [],
-        score: 0
+        score: 0 ,
+        winsScore:0
     }
 ]
 const gameDefaultState = {
@@ -144,6 +148,7 @@ function botsTurn() {
     for (i = 0; i < gameState.players.length; i++) {
         if (gameState.players[i].score >= 21) {
             gameEnd()
+            break;
         }
     }
 }
@@ -168,7 +173,7 @@ function updateScores() {
             + ' score: <span class="scoreValue">'
             + gameState.players[i].score
             + '</span> chance: '
-            + chance(i)
+            + chance(i)          
             + '</td> ';
 
     }
@@ -202,19 +207,33 @@ for (let i = 0; i < gameState.players.length; i++) {
 document.getElementById('playersCards').innerHTML = html*/
 }
 function gameEnd() {
-
-    let maxScore = 0;
-    let maxScorePlayer = '';
+    let maxScore = 0
+    let maxScorePlayer = ''
+    let maxScorePlayerIndex = -1
 
     for (let i = 0; i < gameState.players.length; i++) {
         if (gameState.players[i].score <= 21 && maxScore < gameState.players[i].score) {
             maxScore = gameState.players[i].score
             maxScorePlayer = gameState.players[i].name
+            maxScorePlayerIndex = i
         }
     }
+    gameState.players[maxScorePlayerIndex].winsScore ++
+    defaultPlayers[maxScorePlayerIndex].winsScore ++
+
 
     document.getElementById('maxScore').innerHTML = maxScorePlayer
-
+    let html = ""
+    for (let i = 0; i < gameState.players.length; i++) {
+        html = html
+            + '<td class="scores"> '
+            + gameState.players[i].name
+            + ' wins: </span class="scoreValue"> '
+            + gameState.players[i].winsScore  
+            + '</span>'
+            + '</td> ';
+    }
+    document.getElementById('playersWinScores').innerHTML = html
     let gameEndScreen = document.getElementById('gameEndScreen')
     gameEndScreen.classList.add('visible')
 
