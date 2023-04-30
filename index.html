@@ -2,48 +2,96 @@
 
 <head>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="code.js"></script>
 </head>
 
 <body>
-    <div class="display">
-        <h1 class="title">It's a 21 game</h1>
-        <div class="screens">
-            <div id="gameStartScreen" class="screen visible">
-                <p>Rules</p>
-                <p>...</p>
-                <div class="actions">
-                    <button onclick="startGame()" class="button-54" role="button">Start game</button>
-                </div>
-            </div>
-            <div id="gameScreen" class="screen">
-                <table>
-                    <tr id="playersScores"></tr>
-                    <tr id="playersCards"></tr>
-                </table>
-                <div class="actions invisible" id="gameScreenActions">
-                    <button onclick="takeCard()" class="button-54" role="button">Take card</button>
-                    <button onclick="passCard()" class="button-54" role="button">Pass</button>
-                    <button onclick="restart()" class="button-54" role="button">Restart</button>
-                </div>
-                <div id="gameEndScreen" class="screen">
-                    <div id="gameResult"><span id="maxScore">22</span> won!</div>
+    <div id="app">
+        <div class="display">
+            <h1 class="title" @click="changeTitle">{{ appTitle }}</h1>
+            <div class="screens">
+                <div id="gameStartScreen" class="screen visible">
+                    <p>Rules</p>
+                    <AppRules></AppRules>
+                    <AppRules></AppRules>
+                    <AppRules></AppRules>
+                    <AppRules></AppRules>
                     <div class="actions">
-                        <button onclick="startNewGame()" class="button-54" role="button">Start new game</button>
+                        <button onclick="startGame()" class="button-54" role="button">Start game</button>
                     </div>
-
                 </div>
-            </div>
+                <div id="gameScreen" class="screen">
+                    <table>
+                        <tr id="playersScores"></tr>
+                        <tr id="playersCards"></tr>
+                    </table>
+                    <div class="actions invisible" id="gameScreenActions">
+                        <button onclick="takeCard()" class="button-54" role="button">Take card</button>
+                        <button onclick="passCard()" class="button-54" role="button">Pass</button>
+                        <button onclick="restart()" class="button-54" role="button">Restart</button>
+                    </div>
+                    <div id="gameEndScreen" class="screen">
+                        <div id="gameResult"><span id="maxScore">22</span> won!</div>
+                        <div class="actions">
+                            <button onclick="startNewGame()" class="button-54" role="button">Start new game</button>
+                        </div>
 
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="screen visible winScores">
+            <table>
+                <tr id="playersWinScores"></tr>
+            </table>
         </div>
     </div>
-    <br />
-    <div class="screen visible winScores">
-        <table>
-            <tr id="playersWinScores"></tr>
-        </table>
-    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        let apprules = {
+            template:  `
+                <p @click="changeRules">
+                {{ rules }}
+                </p>`,
+            data() {
+                return {
+                    rules: "Yeah"
+                }
+            },
+            methods: {
+                changeRules() {
+                    this.rules = this.rules + ' yeah!'
+                }
+            }
+        }
+
+        createApp({
+            components: {
+                apprules
+            },
+            data() {
+                return {
+                    appTitle: "It's a 21 game"
+                }
+            },
+            watch: {
+                appTitle(newValue) {
+                    console.log(newValue)
+                }
+            },
+            methods: {
+                changeTitle() {
+                    this.appTitle = this.appTitle + '1'
+                }
+            }
+        }).mount('#app')
+    </script>
+
 </body>
 
 </html>

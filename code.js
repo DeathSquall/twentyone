@@ -100,9 +100,9 @@ function chance(i) {
     return probability
 }
 function startGame() {
-    let gameStartScreen = $("#gameStartScreen");//document.getElementById('gameStartScreen')
+    let gameStartScreen = document.getElementById('gameStartScreen')
     
-    gameStartScreen.removeClass('visible')
+    gameStartScreen.classList.remove('visible')
 
     let gameScreen = document.getElementById('gameScreen')
     gameScreen.classList.add('visible')
